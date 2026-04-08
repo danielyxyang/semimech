@@ -1,4 +1,4 @@
-# semimech
+# Semi-Mechanistic Residual Stream Analysis
 
 A comprehensive suite for extracting, analyzing, and visualizing internal **activation trajectories** from the residual streams of large language models. It identifies "concept directions" using readers (such as PCA or Linear Probing), projecting activations to visualize how internal representations evolve across layers and token positions.
 
