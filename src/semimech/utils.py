@@ -143,8 +143,8 @@ def get_tooltips_per_layer(sample: dict, layer_idx: int, topk: int = 3, html: bo
         )
     ):
         text.append(
-            f"ID: {sample['id']}"
-            f"<br>Position: {token_pos + 1}/{len(tokens_all)} ({token_idx + 1}/{len(tokens)})"
+            f"Sample: {sample['id']}"
+            f"<br>Token pos.: {token_pos + 1}/{len(tokens_all)} ({token_idx + 1}/{len(tokens)})"
             f"<br>Token: '{escape_token(token, html=html)}'"
             f"<br>Top-k: {topk_to_text(topk_tokens[:topk], topk_probs[:topk], html=html) if topk_tokens is not None else 'N/A'}"
             f"<br><extra>{tokens_to_text(tokens_all, highlight=token_pos, html=html)}</extra>"
@@ -159,13 +159,13 @@ def get_tooltips_per_token(sample: dict, token_idx: int, k: int = 3, html: bool 
     token = sample["tokens"][token_idx]
     token_pos = sample["token_positions"][token_idx]
     text = []
-    for layer_idx, topk_tokens, topk_probs in zip(
-        sample["layers"], sample["topk"].tokens[token_idx], sample["topk"].probs[token_idx]
+    for layer_idx, (layer, topk_tokens, topk_probs) in enumerate(
+        zip(sample["layers"], sample["topk"].tokens[token_idx], sample["topk"].probs[token_idx])
     ):
         text.append(
-            f"ID: {sample['id']}"
-            f"<br>Layer: {layer_idx}/{sample['activations'].shape[1] - 1}"
-            f"<br>Position: {token_pos + 1}/{len(tokens_all)} ({token_idx + 1}/{len(tokens)})"
+            f"Sample: {sample['id']}"
+            f"<br>Layer: {layer} ({layer_idx + 1}/{sample['activations'].shape[1]})"
+            f"<br>Token pos.: {token_pos + 1}/{len(tokens_all)} ({token_idx + 1}/{len(tokens)})"
             f"<br>Token: '{escape_token(token, html=html)}'"
             f"<br>Top-k: {topk_to_text(topk_tokens[:k], topk_probs[:k], html=html) if topk_tokens is not None else 'N/A'}"
             f"<br><extra>{tokens_to_text(tokens_all, highlight=token_pos, html=html)}</extra>"
