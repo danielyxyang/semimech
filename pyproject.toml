@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Semi-mechanistic analysis tools for the residual stream."
 readme = "README.md"
 authors = [
-    { name = "Daniel Yang", email = "daniel.yang@inf.ethz.ch" },
+    { name = "XXXXX", email = "xxxxx@email.com" },
 ]
 requires-python = ">=3.12"
 dependencies = [
