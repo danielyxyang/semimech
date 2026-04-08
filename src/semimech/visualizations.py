@@ -34,7 +34,7 @@ def plot_reader_statistics(readers: dict[int, ActivationReaders], xlabel: str = 
     accuracy = np.stack([readers[i].accuracy_ for i in positions], axis=1)
     labels = readers[positions[0]].labels
 
-    fig, axes = plt.subplots(ncols=2, figsize=(12, 4), layout="constrained")
+    fig, axes = plt.subplots(ncols=2, figsize=(10, 4), layout="constrained")
 
     # Plot explained variance
     ax = axes[0]
