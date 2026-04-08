@@ -27,7 +27,7 @@ This notebook provides an interactive GUI that lets you:
 
 ### Manual Analysis API
 The second half of this notebook serves as a getting-started tutorial for the `semimech` Python API. It demonstrates how to programmatically:
-- Load models and datasets (`load_model_and_tokenizer`, `load_dataset_from_spec`).
+- Load models and datasets (`load_model_and_tokenizer_from_spec`, `load_dataset_from_spec`).
 - Extract, save, and load activations (`extract_activations`, `Activations.save`, `Activations.load`).
 - Analyze per-layer and per-token trajectories (`analyze_per_layer`, `analyze_per_token`).
 - Visualize trajectories (`plot_per_layer`, `plot_per_token`).

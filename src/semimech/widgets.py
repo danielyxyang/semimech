@@ -7,8 +7,8 @@ from natsort import natsort_keygen
 from traitlets import Bool
 
 from semimech.activations import Activations, PoolMethod, extract_activations
-from semimech.data import DATASET_REGISTRY, load_dataset_from_spec
-from semimech.model import MODEL_REGISTRY, get_token_embeddings, load_model_and_tokenizer
+from semimech.datasets import DATASET_REGISTRY, load_dataset_from_spec
+from semimech.models import MODEL_REGISTRY, get_token_embeddings, load_model_and_tokenizer_from_spec
 from semimech.utils import select
 
 
@@ -149,7 +149,7 @@ class ActivationsExtractorWidget(widgets.VBox, widgets.ValueWidget):
             self.out.clear_output(wait=True)
 
             # Extract activations
-            model, tokenizer = load_model_and_tokenizer(self.model_name)
+            model, tokenizer = load_model_and_tokenizer_from_spec(self.model_name)
             dataset = load_dataset_from_spec(self.dataset_name, max_samples=self.max_samples)
             activations = extract_activations(
                 model,
@@ -272,7 +272,7 @@ class TopKExtractorWidget(widgets.VBox, widgets.ValueWidget):
             self.out.clear_output(wait=True)
 
             # Extract topk tokens
-            model, tokenizer = load_model_and_tokenizer(self.model_name)
+            model, tokenizer = load_model_and_tokenizer_from_spec(self.model_name)
             for layer in self.layers:
                 self.activations.extract_topk(model, tokenizer, layer=layer, k=self.k)
 
@@ -329,7 +329,7 @@ class TokenEmbeddingsLoaderWidget(widgets.VBox, widgets.ValueWidget):
         with self._update_buttons(), self.out:
             self.out.clear_output(wait=True)
 
-            model, tokenizer = load_model_and_tokenizer(self.model_name)
+            model, tokenizer = load_model_and_tokenizer_from_spec(self.model_name)
             token_ids = select(range(tokenizer.vocab_size), at_most=self.max_tokens)
             token_embeddings = get_token_embeddings(model, tokenizer, token_ids=token_ids)
             self._update_value(token_embeddings)

@@ -74,7 +74,7 @@ def get_device(device: str | None = None) -> str:
     return "cpu"
 
 
-def load_model_and_tokenizer(
+def load_model_and_tokenizer_from_spec(
     model_spec: ModelSpec | str,
     device: str | None = None,
 ) -> tuple[PreTrainedModel, PreTrainedTokenizerBase]:
